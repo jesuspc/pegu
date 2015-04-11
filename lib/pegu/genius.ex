@@ -9,6 +9,14 @@ defmodule Pegu.Genius do
     board |> Board.to_list |> List.flatten |> Enum.filter(&(&1 == 1)) |> length
   end
 
+  def expansion(board, solution) do
+    board ++ expand_solution(board, solution)
+  end
+
+  defp expand_solution(board, [movement|rest]) do
+    Board.move(board, movement) ++ expand_solution(board, rest)
+  end
+
   defp explore(_, _, path \\ [])
   defp explore(board, [], path) do; [] end
   defp explore(board, [movement | rest], path) do
