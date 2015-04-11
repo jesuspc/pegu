@@ -1,14 +1,14 @@
 defmodule Pegu.Genious do
-  def solve(board) do
-    board = to_tuple board
+  alias Pegu.Board, as: Board
+
+  def solve(board, acc \\ []) do
     # Pending
   end
-
-  defp position(board, i, j) do
-    board |> elem(i) |> elem(j)
-  end
-
-  defp to_tuple(board) do
-    board |> Enum.map(fn(elm) -> List.to_tuple(elm) end) |> List.to_tuple
+ 
+  defp path(board, acc \\ []) do
+    if Board.tokens(board) == 1 do
+      acc
+    else
+    end
   end
 end

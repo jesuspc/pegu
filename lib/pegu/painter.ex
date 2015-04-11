@@ -1,4 +1,3 @@
-require IEx
 defmodule Pegu.Picture do
   def draw(board, output_method \\ &IO.puts/1 ) do
     out = (border(board) ++ lines(board)) |> Enum.map fn(elm) -> "#{elm}\n" end
