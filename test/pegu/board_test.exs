@@ -1,27 +1,5 @@
 defmodule Pegu.BoardTest do
   use ExUnit.Case
-  @tag timeout: 1000000000
-
-  test "#tokens returns the number of tokens at the board" do
-    board_1 = [
-      [1,0],
-      [0,0]
-    ]
-
-    board_2 = [
-      [1,0],
-      [0,1]
-    ]
-
-    board_3 = [
-      [0,1],
-      [1,1]
-    ]
-
-    assert Pegu.Board.tokens(board_1) == 1
-    assert Pegu.Board.tokens(board_2) == 2
-    assert Pegu.Board.tokens(board_3) == 3
-  end 
 
   test "#move when the movement is valid returns a board after performing the move" do
     board = [
