@@ -5,10 +5,6 @@ defmodule Pegu.Genius do
     { board, explore(board, valid_movements(board)) }
   end
 
-  def tokens(board) do
-    board |> Board.to_list |> List.flatten |> Enum.filter(&(&1 == 1)) |> length
-  end
-
   def expansion(board, solution) do
     board ++ expand_solution(board, solution)
   end
@@ -18,7 +14,7 @@ defmodule Pegu.Genius do
   end
 
   defp explore(_, _, path \\ [])
-  defp explore(board, [], path) do; [] end
+  defp explore(_, [], _) do; [] end
   defp explore(board, [movement | rest], path) do
     explore_movement(board, movement, path ++ [movement]) ++ explore(board, rest, path)
   end
@@ -27,7 +23,7 @@ defmodule Pegu.Genius do
     board = Board.move board, movement
     
     cond do
-      tokens(board) == 1 -> [path]
+      Board.tokens(board) == 1 -> [path]
       true -> explore board, valid_movements(board), path
     end
   end
@@ -38,15 +34,15 @@ defmodule Pegu.Genius do
     combine(elm, list) ++ combine(rest, list)
   end
   defp combine(x, [elm|rest]) do
-    [[x, elm]] ++ combine(x, rest)
+    [{x, elm}] ++ combine(x, rest)
   end
 
-  defp movements([x, y]) do
+  defp movements({x, y}) do
     [
-      [[x, y], [x + 2, y]], 
-      [[x, y], [x - 2, y]], 
-      [[x, y], [x, y + 2]], 
-      [[x, y], [x, y - 2]]
+      {{x, y}, {x + 2, y}}, 
+      {{x, y}, {x - 2, y}}, 
+      {{x, y}, {x, y + 2}}, 
+      {{x, y}, {x, y - 2}}
     ]
   end
 

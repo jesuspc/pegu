@@ -7,11 +7,11 @@ defmodule Pegu.GeneratorTest do
     height  = 7
     density = 0.5 
     board   = Pegu.Generator.board %{:width => width, :height => height, :density => density}
-    a_line   = board |> hd
-    a_square = board |> hd |> hd
+    a_line   = board |> elem(0)
+    a_square = board |> elem(0) |> elem(0)
     
-    assert length(board)    == height
-    assert length(hd board) == width
+    assert tuple_size(board)         == height
+    assert tuple_size(elem board, 0) == width
     assert is_number(a_square)
   end
 

@@ -1,8 +1,10 @@
 defmodule Pegu.Generator do
+  alias Pegu.Board, as: Board
+
   def board(%{:width => width, :height => height, :density => density}) do
     line_fn   = { &square/1, { density } }
     column_fn = { &add_elements/1, { line_fn, width, [] } }
-    add_elements { column_fn, height, [] }
+    add_elements({ column_fn, height, [] }) |> Board.to_tuple
   end
 
   def square({density}) when density <= 1 do
